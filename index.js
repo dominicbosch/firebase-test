@@ -1,17 +1,20 @@
 'use strict';
 
-let Firebase = require('firebase');
+let firebase = require('firebase');
+let os = require('os');
 
-let db = new Firebase('https://analyze-watson.firebaseio.com/');
+firebase.initializeApp({
+	databaseURL: 'https://analyze-watson.firebaseio.com',
+	serviceAccount: '.credentials'
+});
 
-db.set({
-	title: 'Hello World!',
-	author: 'Firebase',
-	location: {
-		city: 'San Francisco',
-		state: 'California',
-		zip: 94103
-	}
+let db = firebase.database();
+let ref = db.ref('/');
+ref.set({
+	pid: process.pid,
+	host: os.hostname(),
+	timestamp: (new Date()).toISOString(),
+	title: 'Hello World!'
 });
 
 
