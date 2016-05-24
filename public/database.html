@@ -12,7 +12,7 @@
 
 			var db = firebase.database();
 			var ref = db.ref('/app-frontend');
-			ref.set({ message: 'Browser connected to firebase!' });
+			ref.set({ message: 'New Browser connected to firebase!' });
 			
 		</script>
 		
@@ -74,9 +74,21 @@
 		<div id="message">
 			<h1>Welcome to Firebase Hosting</h1>
 			<p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
+			<input type="text" id="inp" /><button onclick="submit()">send</button>
+			<div id="outp"></div>
 			<ul>
 				<li><a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a></li>
 			</ul>
 		</div>
+		<script>
+
+			function submit() {
+				ref.set({ message: document.getElementById('inp').value });		
+			}
+			ref.on('value', function(snapshot) {
+				var obj = snapshot.val();
+				document.getElementById('outp').innerHTML = obj.message;
+			});			
+		</script>
 	</body>
 </html>
