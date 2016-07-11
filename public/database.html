@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Welcome to Firebase Hosting</title>
+		<title>Hello World Chat</title>
 		<script src="https://www.gstatic.com/firebasejs/3.0.2/firebase.js"></script>
 		<script>
 			var config = {
@@ -11,11 +11,9 @@
 			firebase.initializeApp(config);
 
 			var db = firebase.database();
-			var ref = db.ref('/app-frontend');
-			ref.set({ message: 'New Browser connected to firebase!' });
-			
+			var hook = db.ref('/app-frontend');
+			hook.set({ message: 'New Browser connected to firebase!' });
 		</script>
-		
 		<style media="screen">
 			body {
 				font-family: Roboto, Arial, sans-serif;
@@ -30,7 +28,7 @@
 			#message {
 				max-width: 400px;
 				margin: 40px auto;
-				box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2),0 1px 1pxk 0 rgba(0,0,0,0.14),0 2px 1px -1px rgba(0,0,0,0.12);
+				box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2),0 1px 1px 0 rgba(0,0,0,0.14),0 2px 1px -1px rgba(0,0,0,0.12);
 				border-radius: 2px;
 				background: white;
 				padding: 16px 24px;
@@ -72,20 +70,17 @@
 	</head>
 	<body>
 		<div id="message">
-			<h1>Welcome to Firebase Hosting</h1>
-			<p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-			<input type="text" id="inp" /><button onclick="submit()">send</button>
+			<h1>Hello World Chat</h1>
+			
+			<input type="text" id="inp" />
+			<button onclick="submit()">send</button>
 			<div id="outp"></div>
-			<ul>
-				<li><a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a></li>
-			</ul>
 		</div>
 		<script>
-
 			function submit() {
-				ref.set({ message: document.getElementById('inp').value });		
+				hook.set({ message: document.getElementById('inp').value });		
 			}
-			ref.on('value', function(snapshot) {
+			hook.on('value', function(snapshot) {
 				var obj = snapshot.val();
 				document.getElementById('outp').innerHTML = obj.message;
 			});			
